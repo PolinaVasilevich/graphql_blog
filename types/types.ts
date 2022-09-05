@@ -1,6 +1,8 @@
 export interface IAuthor {
   name: string;
-  photo: string;
+  photo: {
+    url: string;
+  };
   bio: string;
   posts: IPost[];
 }
@@ -13,9 +15,13 @@ export interface ICategory {
 export interface IPost {
   title: string;
   excerpt: string;
-  // content: string;
-  // image: string;
-  // author: IAuthor;
-  // featuredPost: boolean;
-  // categories: ICategory[];
+  content: string;
+  featuredImage: {
+    url: string;
+  };
+  author: IAuthor;
+  featuredPost: boolean;
+  categories: ICategory[];
+  slug: string;
+  createdAt: string;
 }

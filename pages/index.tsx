@@ -1,19 +1,21 @@
 import Head from "next/head";
+import { FC } from "react";
 import { Categories, PostCard, PostWidget } from "../components";
+import { getPosts } from "../services";
+import { IPost } from "../types/types";
 
-const posts = [
-  {
-    title: "React",
-    excerpt: "Learn React",
-  },
+export async function getStaticProps() {
+  const posts = (await getPosts()) || [];
+  return {
+    props: { posts },
+  };
+}
 
-  {
-    title: "React with Tailwind",
-    excerpt: "React with Tailwind",
-  },
-];
+type HomePropsType = {
+  posts: IPost[];
+};
 
-const Home = () => (
+const Home: FC<HomePropsType> = ({ posts }) => (
   <div className="container mx-auto px-10 mb-8">
     <Head>
       <title>Blog</title>
@@ -22,7 +24,7 @@ const Home = () => (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
       <div className="lg:col-span-8 col-span-1">
         {posts.map((post) => (
-          <PostCard post={post} key={post.title} />
+          <PostCard post={post.node} key={post.node.title} />
         ))}
       </div>
       <div className="lg:col-apn-4 col-span-1">
