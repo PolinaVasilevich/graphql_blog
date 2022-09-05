@@ -10,6 +10,7 @@ export interface IAuthor {
 export interface ICategory {
   name: string;
   posts: IPost[];
+  slug: string;
 }
 
 export interface IPost {
