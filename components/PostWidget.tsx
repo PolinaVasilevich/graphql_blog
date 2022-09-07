@@ -2,10 +2,10 @@ import { FC, useState, useEffect } from "react";
 import moment from "moment";
 import Link from "next/link";
 import { getRecentPosts, getSimilarPosts } from "../services";
-import { ICategory, IPost } from "../types/types";
+import { IPost } from "../types/types";
 
 type PostWidgetPropsType = {
-  categories: ICategory[];
+  categories: any[];
   slug: string;
 };
 
