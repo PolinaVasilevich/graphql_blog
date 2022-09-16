@@ -1,5 +1,3 @@
-import { FC } from "react";
-import { GetStaticProps, GetStaticPaths } from "next";
 import { useRouter } from "next/router";
 
 import {
@@ -16,7 +14,7 @@ import { getPostDetails, getPosts } from "../../services";
 import { IPost } from "../../types/types";
 import Loader from "../../components/Loader";
 
-export const getStaticPaths: GetStaticPaths = async () => {
+export const getStaticPaths = async () => {
   const posts = await getPosts();
 
   return {
@@ -25,8 +23,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-export const getStaticProps: GetStaticProps = async (context) => {
-  const { slug }: any = context.params;
+export const getStaticProps = async (context) => {
+  const { slug } = context.params;
   const data = await getPostDetails(slug);
 
   return {
@@ -36,11 +34,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   };
 };
 
-type PostDetailsPropsType = {
-  post: IPost;
-};
-
-const PostDetails: FC<PostDetailsPropsType> = ({ post }) => {
+const PostDetails = ({ post }) => {
   const router = useRouter();
 
   if (router.isFallback) {
