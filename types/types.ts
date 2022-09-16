@@ -26,3 +26,9 @@ export interface IPost {
   slug: string;
   createdAt: string;
 }
+
+export interface IComment {
+  name: string;
+  createdAt: string;
+  comment: string;
+}

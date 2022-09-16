@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { GetStaticProps, GetStaticPaths } from "next";
+import { useRouter } from "next/router";
 
 import {
   PostDetail,
@@ -11,14 +12,16 @@ import {
 } from "../../components";
 
 import { getPostDetails, getPosts } from "../../services";
+
 import { IPost } from "../../types/types";
+import Loader from "../../components/Loader";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const posts = await getPosts();
 
   return {
     paths: posts.map(({ node: { slug } }) => ({ params: { slug } })),
-    fallback: false,
+    fallback: true,
   };
 };
 
@@ -38,6 +41,12 @@ type PostDetailsPropsType = {
 };
 
 const PostDetails: FC<PostDetailsPropsType> = ({ post }) => {
+  const router = useRouter();
+
+  if (router.isFallback) {
+    return <Loader />;
+  }
+
   return (
     <div className="container mx-auto px-10 mb-8">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
