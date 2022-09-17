@@ -11,8 +11,12 @@ export async function getStaticProps() {
   };
 }
 
+type PostFromServerType = {
+  node: IPost;
+};
+
 type HomePropsType = {
-  posts: IPost[];
+  posts: PostFromServerType[];
 };
 
 const Home: FC<HomePropsType> = ({ posts }) => (
@@ -29,7 +33,7 @@ const Home: FC<HomePropsType> = ({ posts }) => (
       </div>
       <div className="lg:col-span-4 col-span-1">
         <div className="lg:sticky relative top-8">
-          <PostWidget />
+          {/* <PostWidget /> */}
           <Categories />
         </div>
       </div>
